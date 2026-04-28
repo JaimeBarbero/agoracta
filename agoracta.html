@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AGORACTA® — Ágora News</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;800;900&family=Barlow:wght@300;400;500;600;700&display=swap');
+:root{--orange:#FF782D;--dark:#1A1F21;--gray:#CCCCCC;--bg:#F0EEEB;--white:#FFFFFF;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--dark);overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 56px;background:rgba(240,238,235,0.94);backdrop-filter:blur(16px);border-bottom:1px solid rgba(26,31,33,0.08);}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.logo-words{display:flex;flex-direction:column;line-height:1.05;}
+.logo-agora{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:19px;letter-spacing:.05em;text-transform:uppercase;color:var(--dark);}
+.logo-acta{font-family:'Barlow Condensed',sans-serif;font-weight:300;font-size:19px;letter-spacing:.05em;text-transform:uppercase;color:var(--dark);}
+.sup-r{font-size:10px;vertical-align:super;font-weight:400;}
+.nav-right{display:flex;align-items:center;gap:32px;}
+.nav-link{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--dark);text-decoration:none;opacity:.55;transition:opacity .2s;}
+.nav-link:hover{opacity:1;}
+.btn-nav{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:var(--dark);border:none;padding:10px 26px;border-radius:100px;cursor:pointer;text-decoration:none;transition:background .2s,transform .15s;}
+.btn-nav:hover{background:var(--orange);transform:translateY(-1px);}
+
+/* HERO */
+.hero{min-height:100vh;background:var(--dark);display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:120px 56px 80px;gap:60px;position:relative;overflow:hidden;}
+.hero-deco{position:absolute;top:-200px;right:-200px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(255,120,45,.12) 0%,transparent 70%);pointer-events:none;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);margin-bottom:28px;}
+.hero-eyebrow::before{content:'';display:block;width:28px;height:2px;background:var(--orange);}
+.hero h1{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(56px,5.5vw,88px);line-height:.9;text-transform:uppercase;color:var(--white);letter-spacing:-.01em;margin-bottom:0;}
+.hero h1 .outline{-webkit-text-stroke:1.5px rgba(255,255,255,.3);color:transparent;}
+.hero h1 .accent{color:var(--orange);}
+.hero-sub{font-size:17px;font-weight:300;line-height:1.7;color:rgba(204,204,204,.85);max-width:440px;margin-top:28px;margin-bottom:48px;}
+.hero-sub strong{color:var(--white);font-weight:600;}
+.hero-actions{display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+.btn-primary{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:var(--orange);border:none;padding:15px 38px;border-radius:100px;cursor:pointer;text-decoration:none;display:inline-block;transition:all .2s;}
+.btn-primary:hover{background:#e8681f;transform:translateY(-2px);box-shadow:0 10px 28px rgba(255,120,45,.4);}
+.btn-ghost{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:rgba(204,204,204,.7);text-decoration:none;border-bottom:1px solid rgba(204,204,204,.3);transition:all .2s;padding-bottom:2px;}
+.btn-ghost:hover{color:var(--white);border-color:var(--white);}
+.hero-stats{display:flex;gap:40px;margin-top:56px;padding-top:40px;border-top:1px solid rgba(255,255,255,.08);}
+.stat-num{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:38px;color:var(--orange);line-height:1;}
+.stat-label{font-size:12px;font-weight:400;color:rgba(204,204,204,.6);letter-spacing:.05em;text-transform:uppercase;margin-top:6px;max-width:120px;line-height:1.4;}
+
+/* MOCKUP */
+.hero-right{display:flex;justify-content:flex-end;z-index:2;}
+.mockup{width:100%;max-width:520px;background:#111518;border-radius:16px;border:1px solid rgba(255,255,255,.07);overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.5);}
+.mockup-bar{background:#0d1012;padding:14px 20px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,.05);}
+.dot{width:10px;height:10px;border-radius:50%;}
+.dot-r{background:#ff5f57;} .dot-y{background:#febc2e;} .dot-g{background:#28c840;}
+.mockup-url{flex:1;margin-left:12px;background:rgba(255,255,255,.06);border-radius:6px;padding:5px 14px;font-size:11px;color:rgba(255,255,255,.3);}
+.mockup-body{padding:28px;}
+.mock-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.mock-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;color:var(--white);letter-spacing:.05em;text-transform:uppercase;}
+.mock-badge{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#28c840;background:rgba(40,200,64,.12);border:1px solid rgba(40,200,64,.25);padding:3px 10px;border-radius:100px;}
+.mock-plabel{font-size:11px;color:rgba(204,204,204,.5);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;}
+.mock-pbar{height:4px;background:rgba(255,255,255,.08);border-radius:2px;margin-bottom:24px;overflow:hidden;}
+.mock-pfill{height:100%;width:72%;background:linear-gradient(90deg,var(--orange),#ffaa6b);border-radius:2px;animation:prog 3s ease-in-out infinite alternate;}
+@keyframes prog{from{width:55%;}to{width:78%;}}
+.mock-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.mock-row:last-of-type{border-bottom:none;}
+.mock-icon{width:30px;height:30px;border-radius:8px;background:rgba(255,120,45,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.mock-icon svg{width:14px;height:14px;}
+.mock-rname{font-size:12px;font-weight:500;color:rgba(255,255,255,.85);margin-bottom:2px;}
+.mock-rsub{font-size:10px;color:rgba(204,204,204,.4);}
+.mock-rtime{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:13px;color:var(--orange);}
+.mock-transcript{margin-top:20px;background:rgba(255,255,255,.03);border-radius:10px;padding:14px;border:1px solid rgba(255,255,255,.05);}
+.mock-tlabel{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:10px;}
+.mock-tline{display:flex;gap:10px;margin-bottom:8px;}
+.mock-ts{font-family:'Barlow Condensed',sans-serif;font-size:11px;color:rgba(255,120,45,.7);flex-shrink:0;width:40px;}
+.mock-ttext{font-size:11px;color:rgba(255,255,255,.45);line-height:1.5;}
+.mock-ttext.active{color:rgba(255,255,255,.85);}
+
+/* TICKER */
+.ticker{background:var(--orange);padding:13px 0;overflow:hidden;white-space:nowrap;}
+.ticker-inner{display:inline-flex;animation:tick 35s linear infinite;}
+@keyframes tick{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.ticker-item{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:var(--white);padding:0 32px;display:inline-flex;align-items:center;gap:32px;}
+.ticker-item::after{content:'◆';font-size:8px;opacity:.6;}
+
+/* SECTIONS */
+section{padding:100px 56px;}
+.slabel{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.slabel::before{content:'';display:block;width:24px;height:2px;background:var(--orange);}
+.stitle{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(36px,4vw,60px);text-transform:uppercase;line-height:.95;letter-spacing:-.01em;color:var(--dark);margin-bottom:16px;}
+.stitle .light{font-weight:300;}
+.sbody{font-size:16px;font-weight:300;line-height:1.7;color:#555;max-width:540px;}
+
+/* PROBLEMA */
+.problema{background:var(--dark);padding:80px 56px;}
+.problema-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.ptitle{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(40px,4.5vw,70px);text-transform:uppercase;line-height:.92;color:var(--white);letter-spacing:-.01em;}
+.ptitle .acc{color:var(--orange);}
+.pcards{display:flex;flex-direction:column;gap:16px;}
+.pcard{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:24px 28px;display:flex;gap:20px;align-items:flex-start;}
+.pcard-n{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:32px;line-height:1;color:var(--orange);opacity:.4;flex-shrink:0;width:32px;}
+.pcard h4{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;letter-spacing:.05em;text-transform:uppercase;color:var(--white);margin-bottom:6px;}
+.pcard p{font-size:14px;font-weight:300;color:rgba(204,204,204,.65);line-height:1.6;}
+
+/* FEATURES */
+.fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:64px;background:rgba(26,31,33,.08);border-radius:16px;overflow:hidden;}
+.fcard{background:var(--bg);padding:44px 36px;transition:background .25s;cursor:default;}
+.fcard:hover{background:var(--white);}
+.ficon{width:48px;height:48px;border-radius:12px;background:rgba(255,120,45,.1);display:flex;align-items:center;justify-content:center;margin-bottom:24px;transition:background .25s;}
+.fcard:hover .ficon{background:var(--orange);}
+.ficon svg{width:22px;height:22px;}
+.fcard:hover .ficon svg *{stroke:var(--white) !important;}
+.fnum{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);margin-bottom:10px;opacity:.7;}
+.ftitle{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:.03em;text-transform:uppercase;color:var(--dark);margin-bottom:14px;line-height:1.15;}
+.fdesc{font-size:14px;font-weight:400;line-height:1.65;color:#666;}
+.ftags{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px;}
+.tag{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--dark);background:rgba(26,31,33,.07);border-radius:100px;padding:4px 12px;}
+
+/* HOW */
+.how{background:var(--dark);}
+.how-header{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:64px;}
+.how-intro{font-size:16px;font-weight:300;color:rgba(204,204,204,.7);line-height:1.7;}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(255,255,255,.05);border-radius:16px;overflow:hidden;}
+.step{background:#111518;padding:40px 30px;position:relative;}
+.step-arrow{position:absolute;top:50%;right:-14px;transform:translateY(-50%);width:28px;height:28px;background:var(--orange);border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:2;}
+.step:last-child .step-arrow{display:none;}
+.step-n{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:48px;color:rgba(255,120,45,.15);line-height:1;margin-bottom:16px;}
+.step-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;letter-spacing:.05em;text-transform:uppercase;color:var(--white);margin-bottom:10px;}
+.step-desc{font-size:13px;font-weight:300;color:rgba(204,204,204,.55);line-height:1.6;}
+
+/* PORTAL */
+.portal-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.pfeats{display:flex;flex-direction:column;gap:16px;margin-top:40px;}
+.pfeat{display:flex;gap:18px;align-items:flex-start;padding:22px 26px;background:var(--white);border-radius:12px;border:1px solid rgba(26,31,33,.06);transition:border-color .2s,box-shadow .2s;}
+.pfeat:hover{border-color:var(--orange);box-shadow:0 4px 20px rgba(255,120,45,.08);}
+.pfeat-icon{width:36px;height:36px;border-radius:8px;background:rgba(255,120,45,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.pfeat-icon svg{width:16px;height:16px;}
+.pfeat h4{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:.04em;text-transform:uppercase;color:var(--dark);margin-bottom:4px;}
+.pfeat p{font-size:13px;color:#777;line-height:1.5;font-weight:300;}
+.pmockup{background:var(--white);border-radius:16px;overflow:hidden;border:1px solid rgba(26,31,33,.08);box-shadow:0 20px 60px rgba(26,31,33,.12);}
+.pm-header{background:var(--dark);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;}
+.pm-logo{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--white);}
+.pm-logo span{color:var(--orange);}
+.pm-search{flex:1;margin:0 20px;background:rgba(255,255,255,.08);border-radius:6px;padding:7px 14px;font-size:12px;color:rgba(255,255,255,.35);display:flex;align-items:center;gap:8px;}
+.pm-body{padding:24px;}
+.pm-item{display:flex;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid rgba(26,31,33,.06);}
+.pm-item:last-child{border-bottom:none;}
+.pm-thumb{width:56px;height:36px;background:var(--dark);border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.pm-play{width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:12px solid var(--orange);margin-left:2px;}
+.pm-info{flex:1;}
+.pm-ptitle{font-size:13px;font-weight:600;color:var(--dark);margin-bottom:3px;}
+.pm-meta{font-size:11px;color:#999;}
+.pm-dur{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;color:var(--orange);}
+
+/* CTA */
+.cta-section{background:var(--orange);padding:100px 56px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;overflow:hidden;}
+.cta-section::before{content:'';position:absolute;right:-80px;top:-80px;width:400px;height:400px;border-radius:50%;background:rgba(255,255,255,.08);pointer-events:none;}
+.cta-ey{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.cta-ey::before{content:'';display:block;width:24px;height:2px;background:rgba(255,255,255,.5);}
+.cta-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(40px,4vw,64px);text-transform:uppercase;line-height:.92;color:var(--white);letter-spacing:-.01em;}
+.cta-sub{font-size:17px;font-weight:300;color:rgba(255,255,255,.75);line-height:1.65;margin-top:24px;}
+.cta-sub strong{color:var(--white);font-weight:600;}
+.cform{background:var(--white);border-radius:16px;padding:40px;position:relative;z-index:2;}
+.cform-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:20px;letter-spacing:.05em;text-transform:uppercase;color:var(--dark);margin-bottom:28px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:0;}
+.fg{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;}
+.fg label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#888;}
+.fg input,.fg select{border:1.5px solid rgba(26,31,33,.12);border-radius:8px;padding:11px 14px;font-family:'Barlow',sans-serif;font-size:14px;color:var(--dark);background:var(--bg);outline:none;transition:border-color .2s;-webkit-appearance:none;}
+.fg input:focus,.fg select:focus{border-color:var(--orange);background:var(--white);}
+.btn-submit{width:100%;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:var(--dark);border:none;padding:16px;border-radius:100px;cursor:pointer;margin-top:8px;transition:all .2s;}
+.btn-submit:hover{background:var(--orange);transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,120,45,.3);}
+
+/* FOOTER */
+footer{background:var(--dark);padding:60px 56px 40px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:start;}
+.foot-tag{font-size:13px;color:rgba(204,204,204,.45);font-weight:300;max-width:320px;line-height:1.6;margin-top:12px;}
+.foot-copy{font-size:12px;color:rgba(204,204,204,.25);margin-top:16px;}
+.foot-links{display:flex;gap:40px;padding-top:8px;}
+.foot-col h5{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:16px;}
+.foot-col a{display:block;font-size:14px;color:rgba(255,255,255,.6);text-decoration:none;margin-bottom:10px;transition:color .2s;}
+.foot-col a:hover{color:var(--orange);}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    <svg width="36" height="36" viewBox="0 0 80 80" fill="none">
+      <path d="M2 2 H38 Q38 38 2 38 Z" fill="#FF782D"/>
+      <path d="M42 2 H78 V38 Q42 38 42 2 Z" fill="#FF782D"/>
+      <path d="M2 42 H38 Q38 78 2 78 Z" fill="#FF782D"/>
+      <path d="M42 42 Q78 42 78 78 H42 Z" fill="#FF782D"/>
+      <rect x="37" y="2" width="6" height="76" fill="#F0EEEB"/>
+      <rect x="2" y="37" width="76" height="6" fill="#F0EEEB"/>
+    </svg>
+    <div class="logo-words">
+      <span class="logo-agora">Agora</span>
+      <span class="logo-acta">acta<sup class="sup-r">®</sup></span>
+    </div>
+  </a>
+  <div class="nav-right">
+    <a href="#funcionalidades" class="nav-link">Funcionalidades</a>
+    <a href="#como-funciona" class="nav-link">Cómo funciona</a>
+    <a href="#portal" class="nav-link">Portal Ciudadano</a>
+    <a href="#contacto" class="btn-nav">Solicitar demo</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-deco"></div>
+  <div style="z-index:2;">
+    <div class="hero-eyebrow">Ágora News · Solución para plenos municipales</div>
+    <h1>El pleno<br><span class="accent">digital</span><br><span class="outline">de tu ciudad</span></h1>
+    <p class="hero-sub"><strong>Agoracta</strong> digitaliza, transcribe y publica los plenos municipales de forma automática. Gestión integral en la nube, sin infraestructura adicional y desde el primer día.</p>
+    <div class="hero-actions">
+      <a href="#contacto" class="btn-primary">Solicitar demo gratuita</a>
+      <a href="#como-funciona" class="btn-ghost">Ver cómo funciona →</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">567</div><div class="stat-label">Ayuntamientos objetivo en mayo 2025</div></div>
+      <div><div class="stat-num">100%</div><div class="stat-label">En la nube · sin HW adicional</div></div>
+      <div><div class="stat-num">+10</div><div class="stat-label">Idiomas de transcripción</div></div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="mockup">
+      <div class="mockup-bar">
+        <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+        <div class="mockup-url">agoracta.agoranews.com / pleno-ordinario-abril-2025</div>
+      </div>
+      <div class="mockup-body">
+        <div class="mock-header">
+          <div class="mock-title">Pleno Ordinario — Abril 2025</div>
+          <div class="mock-badge">● Activo</div>
+        </div>
+        <div class="mock-plabel">Transcripción completada</div>
+        <div class="mock-pbar"><div class="mock-pfill"></div></div>
+        <div class="mock-row">
+          <div class="mock-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#FF782D" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+          <div style="flex:1"><div class="mock-rname">Alcaldesa María García</div><div class="mock-rsub">Punto 1 · Apertura de sesión</div></div>
+          <div class="mock-rtime">00:02:14</div>
+        </div>
+        <div class="mock-row">
+          <div class="mock-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#FF782D" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+          <div style="flex:1"><div class="mock-rname">Concejal Luis Fernández</div><div class="mock-rsub">Punto 3 · Presupuesto 2025</div></div>
+          <div class="mock-rtime">00:18:44</div>
+        </div>
+        <div class="mock-row">
+          <div class="mock-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#FF782D" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+          <div style="flex:1"><div class="mock-rname">Concejala Ana Prieto</div><div class="mock-rsub">Punto 3 · Turno de réplica</div></div>
+          <div class="mock-rtime">00:31:07</div>
+        </div>
+        <div class="mock-transcript">
+          <div class="mock-tlabel">Transcripción en tiempo real</div>
+          <div class="mock-tline"><div class="mock-ts">18:44</div><div class="mock-ttext">"...el presupuesto municipal para el ejercicio 2025 contempla una inversión en..."</div></div>
+          <div class="mock-tline"><div class="mock-ts">19:12</div><div class="mock-ttext active">"...en materia de transparencia ciudadana, proponemos la implementación de..."</div></div>
+          <div class="mock-tline"><div class="mock-ts">19:38</div><div class="mock-ttext" style="opacity:.2">█████ ██████ ██████████ ██████</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">Transcripción automática</span>
+    <span class="ticker-item">Videoacta firmada digitalmente</span>
+    <span class="ticker-item">Portal ciudadano incluido</span>
+    <span class="ticker-item">Diarización de oradores</span>
+    <span class="ticker-item">Acta en RTF editable</span>
+    <span class="ticker-item">Búsqueda en vídeo por palabra</span>
+    <span class="ticker-item">Accesibilidad con subtítulos</span>
+    <span class="ticker-item">100% en la nube</span>
+    <span class="ticker-item">Transcripción automática</span>
+    <span class="ticker-item">Videoacta firmada digitalmente</span>
+    <span class="ticker-item">Portal ciudadano incluido</span>
+    <span class="ticker-item">Diarización de oradores</span>
+    <span class="ticker-item">Acta en RTF editable</span>
+    <span class="ticker-item">Búsqueda en vídeo por palabra</span>
+    <span class="ticker-item">Accesibilidad con subtítulos</span>
+    <span class="ticker-item">100% en la nube</span>
+  </div>
+</div>
+
+<!-- PROBLEMA -->
+<div class="problema">
+  <div class="problema-inner">
+    <div>
+      <div class="slabel" style="color:var(--orange);">El reto de los municipios</div>
+      <h2 class="ptitle">567 ayuntamientos<br>aún sin<br><span class="acc">solución<br>digital</span></h2>
+    </div>
+    <div class="pcards">
+      <div class="pcard"><div class="pcard-n">01</div><div><h4>Gestión manual y costosa</h4><p>Transcripción a mano, archivos en papel y horas de revisión por cada pleno celebrado.</p></div></div>
+      <div class="pcard"><div class="pcard-n">02</div><div><h4>Falta de transparencia</h4><p>El ciudadano no puede acceder fácilmente al contenido de los plenos ni buscar intervenciones concretas.</p></div></div>
+      <div class="pcard"><div class="pcard-n">03</div><div><h4>Sin infraestructura TI</h4><p>Los ayuntamientos pequeños no disponen de recursos técnicos para implantar soluciones complejas.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FUNCIONALIDADES -->
+<section id="funcionalidades">
+  <div class="slabel">Funcionalidades</div>
+  <h2 class="stitle">Todo lo que necesita<br><span class="light">tu consistorio</span></h2>
+  <div class="fgrid">
+
+    <div class="fcard">
+      <div class="ficon"><svg viewBox="0 0 24 24" fill="none" stroke="#FF782D" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+      <div class="fnum">01 · Preparación</div>
+      <div class="ftitle">Preparación del pleno</div>
+      <p class="fdesc">Gestiona sesiones con antelación: puntos del orden del día editables en caliente, carga masiva de intervinientes y metadatos personalizados por el administrador.</p>
+      <div class="ftags"><span class="tag">Orden del día</span><span class="tag">Intervinientes</span><span class="tag">Metadatos</span></div>
+    </div>
+
+    <div class="fcard">
+      <div class="ficon"><svg viewBox="0 0 24 24" fill="none" stroke="#FF782D" stroke-width="2" stroke-linecap="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg></div>
+      <div class="fnum">02 · Ingesta</div>
+      <div class="ftitle">Incorporación de vídeo</div>
+      <p class="fdesc">Sube el vídeo del pleno seleccionando el archivo o arrastrándolo al interfaz. Almacenamiento en la nube conforme a la normativa española de custodia de contenidos.</p>
+      <div class="ftags"><span class="tag">Drag &amp; drop</span><span class="tag">Cloud seguro</span><span class="tag">LOPD</span></div>
+    </div>
+
+    <div class="fcard">
+      <div class="ficon"><svg viewBox="0 0 24 24" fill="none" stroke="#FF782D" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+      <div class="fnum">03 · IA y Transcripción</div>
+      <div class="ftitle">Transcripción y diarización</div>
+      <p class="fdesc">Transcripción automática audio-texto en múltiples idiomas con minutado preciso. Identificación automática de oradores (diarización) y corrección desde el interfaz a velocidades superiores a ×1.</p>
+      <div class="ftags"><span class="tag">Multiidioma</span><span class="tag">Diarización</span><span class="tag">Minutado</span></div>
+    </div>
+
+    <div class="fcard">
+      <div class="ficon"><svg viewBox="0 0 24 24" fill="none" stroke="#FF782D" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+      <div class="fnum">04 · Documentación</div>
+      <div class="ftitle">Generación de acta</div>
+      <p class="fdesc">Acta automática en RTF con datos administrativos, intervinientes, orden del día, anotaciones y toda la transcripción. Personalizable con la cabecera y hoja de estilo del ayuntamiento.</p>
+      <div class="ftags"><span class="tag">Formato RTF</span><span class="tag">Personalizable</span><span class="tag">Firmada</span></div>
+    </div>
+
+    <div class="fcard">
+      <div class="ficon"><svg viewBox="0 0 24 24" fill="none" stroke="#FF782D" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+      <div class="fnum">05 · Seguridad</div>
+      <div class="ftitle">Videoacta firmada</div>
+      <p class="fdesc">Firmado del contenido audiovisual mediante HASH del vídeo asociado a cada sesión. Verificación de autenticidad a lo largo de toda la vida útil del contenido. Exportable sin depender de la plataforma.</p>
+      <div class="ftags"><span class="tag">Hash SHA</span><span class="tag">Videoevidencia</span><span class="tag">Exportable</span></div>
+    </div>
+
+    <div class="fcard">
+      <div class="ficon"><svg viewBox="0 0 24 24" fill="none" stroke="#FF782D" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <div class="fnum">06 · Gestión</div>
+      <div class="ftitle">Usuarios y administración</div>
+      <p class="fdesc">Alta, baja y modificación de usuarios con roles configurables, log de actividad completo, metadatos personalizables y gestión multi-sala del consistorio.</p>
+      <div class="ftags"><span class="tag">Roles</span><span class="tag">Log actividad</span><span class="tag">Multi-sala</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CÓMO FUNCIONA -->
+<section class="how" id="como-funciona">
+  <div class="how-header">
+    <div>
+      <div class="slabel" style="color:var(--orange);">Proceso</div>
+      <h2 class="stitle" style="color:var(--white);">Cómo funciona<br><span class="light">Agoracta</span></h2>
+    </div>
+    <p class="how-intro">Del vídeo grabado al pleno publicado y consultable por la ciudadanía, en cuatro pasos simples. Sin infraestructura adicional. Sin conocimientos técnicos.</p>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-arrow"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2"><polyline points="4 2 8 6 4 10"/></svg></div>
+      <div class="step-n">01</div>
+      <div class="step-title">Prepara la sesión</div>
+      <p class="step-desc">Configura el orden del día, carga los intervinientes y personaliza los metadatos antes del pleno.</p>
+    </div>
+    <div class="step">
+      <div class="step-arrow"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2"><polyline points="4 2 8 6 4 10"/></svg></div>
+      <div class="step-n">02</div>
+      <div class="step-title">Sube el vídeo</div>
+      <p class="step-desc">Arrastra el archivo de grabación al interfaz. La plataforma lo almacena de forma segura en la nube nacional.</p>
+    </div>
+    <div class="step">
+      <div class="step-arrow"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2"><polyline points="4 2 8 6 4 10"/></svg></div>
+      <div class="step-n">03</div>
+      <div class="step-title">La IA transcribe</div>
+      <p class="step-desc">Transcripción automática, diarización de oradores, minutado y generación del acta en RTF sin intervención manual.</p>
+    </div>
+    <div class="step">
+      <div class="step-n">04</div>
+      <div class="step-title">Publica y comparte</div>
+      <p class="step-desc">El pleno queda disponible en el portal ciudadano con subtítulos, búsqueda por texto y videoacta firmada digitalmente.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PORTAL CIUDADANO -->
+<section id="portal">
+  <div class="portal-inner">
+    <div>
+      <div class="slabel">Portal ciudadano</div>
+      <h2 class="stitle">Transparencia<br><span class="light">real para</span><br>tu municipio</h2>
+      <p class="sbody" style="margin-top:20px;">Archivo histórico de plenos ordinarios y extraordinarios accesible desde la web del ayuntamiento. Personalizable con los colores y logotipo de la institución.</p>
+      <div class="pfeats">
+        <div class="pfeat">
+          <div class="pfeat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#FF782D" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+          <div><h4>Búsqueda que salta al momento exacto</h4><p>Por palabra, interviniente o punto del día. El vídeo se posiciona automáticamente en el instante preciso de la intervención.</p></div>
+        </div>
+        <div class="pfeat">
+          <div class="pfeat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#FF782D" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div><h4>Subtítulos y accesibilidad</h4><p>Visionado del pleno con subtítulos para garantizar la accesibilidad a personas con discapacidad auditiva.</p></div>
+        </div>
+        <div class="pfeat">
+          <div class="pfeat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#FF782D" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+          <div><h4>Descarga de acta y videoacta firmada</h4><p>La ciudadanía puede descargar el acta firmada y exportar fragmentos de vídeo bajo demanda.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="pmockup">
+      <div class="pm-header">
+        <div class="pm-logo"><span>Agora</span>acta®</div>
+        <div class="pm-search"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Buscar en todos los plenos...</div>
+      </div>
+      <div class="pm-body">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#aaa;margin-bottom:16px;">Plenos recientes</div>
+        <div class="pm-item"><div class="pm-thumb"><div class="pm-play"></div></div><div class="pm-info"><div class="pm-ptitle">Pleno Ordinario — Abril 2025</div><div class="pm-meta">23 abr 2025 · 8 intervinientes · 6 puntos</div></div><div class="pm-dur">1h 42m</div></div>
+        <div class="pm-item"><div class="pm-thumb"><div class="pm-play"></div></div><div class="pm-info"><div class="pm-ptitle">Pleno Extraordinario — Marzo 2025</div><div class="pm-meta">14 mar 2025 · 5 intervinientes · 3 puntos</div></div><div class="pm-dur">48m</div></div>
+        <div class="pm-item"><div class="pm-thumb"><div class="pm-play"></div></div><div class="pm-info"><div class="pm-ptitle">Pleno Ordinario — Febrero 2025</div><div class="pm-meta">27 feb 2025 · 9 intervinientes · 7 puntos</div></div><div class="pm-dur">2h 11m</div></div>
+        <div style="margin-top:20px;padding:14px;background:#f7f5f2;border-radius:10px;border:1px solid rgba(26,31,33,.06);">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:8px;">Búsqueda: "presupuesto"</div>
+          <div style="font-size:12px;color:#555;line-height:1.6;">Encontrado en <strong style="color:var(--dark);">3 plenos</strong> · <strong style="color:var(--dark);">12 intervenciones</strong> · Más relevante: <strong style="color:var(--orange);">18:44</strong> — Pleno Ordinario Abril</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contacto">
+  <div>
+    <div class="cta-ey">Empieza en mayo 2025</div>
+    <h2 class="cta-title">¿Tu municipio<br>todavía no<br>tiene Agoracta?</h2>
+    <p class="cta-sub">Implantación en <strong>menos de una semana</strong>. Sin hardware adicional. Sin equipo técnico propio.<br><br>Durante mayo realizamos acción comercial directa sobre los <strong>567 ayuntamientos</strong> de más de 1.000 habitantes que aún no han incorporado esta solución para sus plenos municipales.</p>
+  </div>
+  <div class="cform">
+    <div class="cform-title">Solicita una demo gratuita</div>
+    <div class="frow">
+      <div class="fg"><label>Nombre</label><input type="text" placeholder="Tu nombre"></div>
+      <div class="fg"><label>Apellidos</label><input type="text" placeholder="Tus apellidos"></div>
+    </div>
+    <div class="fg"><label>Email</label><input type="email" placeholder="nombre@ayuntamiento.es"></div>
+    <div class="frow">
+      <div class="fg"><label>Ayuntamiento</label><input type="text" placeholder="Nombre del municipio"></div>
+      <div class="fg"><label>Cargo</label><input type="text" placeholder="Tu cargo"></div>
+    </div>
+    <div class="fg">
+      <label>Habitantes</label>
+      <select>
+        <option value="">Selecciona rango</option>
+        <option>1.000 – 5.000</option>
+        <option>5.000 – 20.000</option>
+        <option>20.000 – 100.000</option>
+        <option>Más de 100.000</option>
+      </select>
+    </div>
+    <button class="btn-submit">Quiero una demo →</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="logo">
+      <svg width="28" height="28" viewBox="0 0 80 80" fill="none">
+        <path d="M2 2 H38 Q38 38 2 38 Z" fill="#FF782D"/>
+        <path d="M42 2 H78 V38 Q42 38 42 2 Z" fill="#FF782D"/>
+        <path d="M2 42 H38 Q38 78 2 78 Z" fill="#FF782D"/>
+        <path d="M42 42 Q78 42 78 78 H42 Z" fill="#FF782D"/>
+        <rect x="37" y="2" width="6" height="76" fill="#1A1F21"/>
+        <rect x="2" y="37" width="76" height="6" fill="#1A1F21"/>
+      </svg>
+      <div class="logo-words">
+        <span class="logo-agora" style="color:var(--white);font-size:16px;">Agora</span>
+        <span class="logo-acta" style="color:var(--gray);font-size:16px;">acta<sup class="sup-r">®</sup></span>
+      </div>
+    </div>
+    <p class="foot-tag">Plenos municipales digitales, transparentes y accesibles para cualquier ayuntamiento de España. Un producto de Ágora News.</p>
+    <p class="foot-copy">© 2025 Ágora News · C/ Abades, 11 · 28012 Madrid · agoranews.com</p>
+  </div>
+  <div class="foot-links">
+    <div class="foot-col">
+      <h5>Producto</h5>
+      <a href="#">Funcionalidades</a>
+      <a href="#">Cómo funciona</a>
+      <a href="#">Portal ciudadano</a>
+      <a href="#">Seguridad</a>
+    </div>
+    <div class="foot-col">
+      <h5>Empresa</h5>
+      <a href="#">Sobre Ágora News</a>
+      <a href="#">Contacto</a>
+      <a href="#">Privacidad</a>
+      <a href="#">Aviso legal</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
